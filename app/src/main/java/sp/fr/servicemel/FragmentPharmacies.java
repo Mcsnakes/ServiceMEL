@@ -58,7 +58,7 @@ public class FragmentPharmacies extends Fragment implements AdapterView.OnItemCl
     }
 
     private void processResponse(String response) {
-
+        Log.i("Process", "Processs");
         //Transformation de la reponse en liste de pharmaciesList
         pharmaciesList = responseToList(response);
 
@@ -83,7 +83,7 @@ public class FragmentPharmacies extends Fragment implements AdapterView.OnItemCl
     }
 
     private void getDataFromHttp() {
-
+        Log.i("Data", "Data");
         String url = "https://opendata.lillemetropole.fr/api/records/1.0/search/?dataset=pharmacies";
 
         //Définition de la requête
@@ -115,7 +115,7 @@ public class FragmentPharmacies extends Fragment implements AdapterView.OnItemCl
     }
 
     private List<Pharmacies> responseToList(String response) {
-
+    Log.i("List<>", "List<>");
         List<Pharmacies> list = new ArrayList<>();
 
         try {
