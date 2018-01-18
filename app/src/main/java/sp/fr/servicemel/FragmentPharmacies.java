@@ -129,8 +129,17 @@ public class FragmentPharmacies extends Fragment {
             JSONObject items;
             for (int i = 0; i < array.length(); i++) {
 
+                /**
+                 * Bug présent dans le fichier Json à l'index 5
+                 * Mise en place un saut de cette ligne
+                 */
+                if(i == 5) {
+                    i = 6;
+                }
+
                 // On récupère un objet JSON du tableau
                 JSONObject obj = new JSONObject(array.getString(i));
+
 
                 //Création d'une nouvelle pharmacie
                 Pharmacies pharmaUser = new Pharmacies();
@@ -141,20 +150,29 @@ public class FragmentPharmacies extends Fragment {
                 items = (JSONObject) array.get(i);
                 JSONObject field = items.getJSONObject("fields");
 
-                pharmaUser.setName((String) field.get("name") + i);
-                /*
-                pharmaUser.setHoraire((String) field.get("opening_hours"));
 
-                //
-                pharmaUser.setTypeBat(obj.getString("datasetid") + i);
+                if(field.has("name")) {
+                    pharmaUser.setName((String) field.get("name") + (i) );
+                } else {
+                    pharmaUser.setName("inconnu");
+                }
+                if(field.has("opening_hours")) {
+                    pharmaUser.setHoraire((String) field.get("opening_hours"));
+                } else {
+                    pharmaUser.setHoraire("inconnu");
+                }
+                if(field.has("datasetid")) {
+                    pharmaUser.setTypeBat(obj.getString("datasetid"));
+                } else {
+                    pharmaUser.setTypeBat("inconnu");
+                }
 
                 //Extraction des coordonnées gps
-
                 JSONArray geo = items.getJSONObject("geometry").getJSONArray("coordinates");
                 pharmaUser.setLatitude(geo.getDouble(0));
                 pharmaUser.setLongitude(geo.getDouble(1));
 
-                */
+
 
                 list.add(pharmaUser);
 
