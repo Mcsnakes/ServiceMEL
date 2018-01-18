@@ -33,7 +33,7 @@ import sp.fr.servicemel.model.Pharmacies;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FragmentPharmacies extends Fragment {
+public class FragmentPharmacies extends Fragment implements AdapterView.OnItemClickListener {
 
     private List<Pharmacies> pharmaciesList;
     private ListView pharmaciesListView;
@@ -51,6 +51,7 @@ public class FragmentPharmacies extends Fragment {
         View view = inflater.inflate(R.layout.fragment_pharmacies, container, false);
 
         pharmaciesListView = view.findViewById(R.id.pharmaciesListView);
+        pharmaciesListView.setOnItemClickListener(this);
 
         return view;
     }
@@ -129,14 +130,6 @@ public class FragmentPharmacies extends Fragment {
             JSONObject items;
             for (int i = 0; i < array.length(); i++) {
 
-                /**
-                 * Bug présent dans le fichier Json à l'index 5
-                 * Mise en place un saut de cette ligne
-                 */
-                if(i == 5) {
-                    i = 6;
-                }
-
                 // On récupère un objet JSON du tableau
                 JSONObject obj = new JSONObject(array.getString(i));
 
@@ -152,7 +145,7 @@ public class FragmentPharmacies extends Fragment {
 
 
                 if(field.has("name")) {
-                    pharmaUser.setName((String) field.get("name") + (i) );
+                    pharmaUser.setName((String) field.get("name") );
                 } else {
                     pharmaUser.setName("inconnu");
                 }
@@ -187,18 +180,20 @@ public class FragmentPharmacies extends Fragment {
         return list;
     }
 
+
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+
+
 
         //Récupération de la pharmacies sur laquel on vient de cliquer
         Pharmacies selectedPharmacies = this.pharmaciesList.get(position);
 
-        //Snackbar.make(this, "Message de test", Snackbar.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "P : " + selectedPharmacies.getName(), Toast.LENGTH_LONG).show();
 
         //Création d'un intent pour afficher la carte
-        /**
-         * A venir ;)
-         */
+
 
 
     }
+
 }
