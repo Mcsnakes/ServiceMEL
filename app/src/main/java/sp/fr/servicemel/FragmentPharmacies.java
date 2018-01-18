@@ -1,6 +1,7 @@
 package sp.fr.servicemel;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.design.widget.Snackbar;
@@ -191,8 +192,16 @@ public class FragmentPharmacies extends Fragment implements AdapterView.OnItemCl
         Toast.makeText(getActivity(), "P : " + selectedPharmacies.getName(), Toast.LENGTH_LONG).show();
 
         //Création d'un intent pour afficher la carte
+        Intent detailPharmacie = new Intent(this.getActivity(), DetailPharmacie.class);
 
+        //Passage de paramètres à l'intention
+        detailPharmacie.putExtra("name", selectedPharmacies.getName());
+        detailPharmacie.putExtra("type", selectedPharmacies.getTypeBat());
+        detailPharmacie.putExtra("horaire", selectedPharmacies.getHoraire());
+        detailPharmacie.putExtra("latitude", selectedPharmacies.getLatitude());
+        detailPharmacie.putExtra("longitude", selectedPharmacies.getLongitude());
 
+        startActivity(detailPharmacie);
 
     }
 
