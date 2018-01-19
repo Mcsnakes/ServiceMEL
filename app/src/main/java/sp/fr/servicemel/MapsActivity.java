@@ -27,8 +27,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //Récupération des données âsser à l'activité
         Bundle params = getIntent().getExtras();
+
         latitude = params.getDouble("latitude");
         longitude = params.getDouble("longitude");
+
     }
 
 
@@ -43,8 +45,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
 
+        mMap = googleMap;
+        //Réglage du zoom par défaut
+        mMap.setMinZoomPreference(16);
 
         LatLng sydney = new LatLng(longitude, latitude);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Position de la pharmacie selectionner"));
